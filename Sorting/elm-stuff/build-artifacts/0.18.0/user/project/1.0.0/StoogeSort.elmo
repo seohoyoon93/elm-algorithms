@@ -1,0 +1,99 @@
+var _user$project$StoogeSort$stoogeSort = function (list) {
+	var _p0 = list;
+	if (_p0.ctor === '[]') {
+		return list;
+	} else {
+		if (_p0._1.ctor === '[]') {
+			return list;
+		} else {
+			if (_p0._1._1.ctor === '[]') {
+				var _p2 = _p0._1._0;
+				var _p1 = _p0._0;
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$core$Basics$min, _p1, _p2),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$core$Basics$max, _p1, _p2),
+						_1: {ctor: '[]'}
+					});
+			} else {
+				var _p4 = _p0._1;
+				var _p3 = _p0._0;
+				var middleList = _elm_lang$core$List$reverse(
+					A2(
+						_elm_lang$core$List$drop,
+						1,
+						_elm_lang$core$List$reverse(_p4)));
+				var listLength = _elm_lang$core$List$length(list);
+				var stoogeLength = (listLength / 3) | 0;
+				var l = A2(
+					_elm_lang$core$Maybe$withDefault,
+					_p3,
+					_elm_lang$core$List$head(
+						_elm_lang$core$List$reverse(_p4)));
+				var first_ = A2(_elm_lang$core$Basics$min, _p3, l);
+				var last_ = A2(_elm_lang$core$Basics$max, _p3, l);
+				var sortingList1 = A2(
+					_elm_lang$core$Basics_ops['++'],
+					{
+						ctor: '::',
+						_0: first_,
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						middleList,
+						{
+							ctor: '::',
+							_0: last_,
+							_1: {ctor: '[]'}
+						}));
+				var stooge1 = _user$project$StoogeSort$stoogeSort(
+					A2(_elm_lang$core$List$take, listLength - stoogeLength, sortingList1));
+				var remainderStooge1 = A2(_elm_lang$core$List$drop, listLength - stoogeLength, sortingList1);
+				var sortingList2 = A2(_elm_lang$core$Basics_ops['++'], stooge1, remainderStooge1);
+				var stooge2 = _user$project$StoogeSort$stoogeSort(
+					A2(_elm_lang$core$List$drop, stoogeLength, sortingList2));
+				var remainderStooge2 = A2(_elm_lang$core$List$take, stoogeLength, sortingList2);
+				var sortingList3 = A2(_elm_lang$core$Basics_ops['++'], remainderStooge2, stooge2);
+				var stooge3 = _user$project$StoogeSort$stoogeSort(
+					A2(_elm_lang$core$List$take, listLength - stoogeLength, sortingList3));
+				var remainderStooge3 = A2(_elm_lang$core$List$drop, listLength - stoogeLength, sortingList3);
+				return A2(_elm_lang$core$Basics_ops['++'], stooge3, remainderStooge3);
+			}
+		}
+	}
+};
+var _user$project$StoogeSort$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
+	_elm_lang$html$Html$text(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'[5,3,8,1,2]  ',
+			_elm_lang$core$Basics$toString(
+				_user$project$StoogeSort$stoogeSort(
+					{
+						ctor: '::',
+						_0: 5,
+						_1: {
+							ctor: '::',
+							_0: 3,
+							_1: {
+								ctor: '::',
+								_0: 8,
+								_1: {
+									ctor: '::',
+									_0: 1,
+									_1: {
+										ctor: '::',
+										_0: 2,
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					})))));
